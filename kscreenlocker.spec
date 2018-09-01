@@ -4,7 +4,7 @@
 #
 Name     : kscreenlocker
 Version  : 5.13.4
-Release  : 2
+Release  : 3
 URL      : https://github.com/KDE/kscreenlocker/archive/v5.13.4.tar.gz
 Source0  : https://github.com/KDE/kscreenlocker/archive/v5.13.4.tar.gz
 Summary  : No detailed summary available
@@ -29,6 +29,11 @@ BuildRequires : kwayland-dev
 BuildRequires : kwidgetsaddons-dev
 BuildRequires : kwindowsystem-dev
 BuildRequires : kxmlgui-dev
+BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
+BuildRequires : pkg-config
+BuildRequires : pkgconfig(libseccomp)
+BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtx11extras-dev
 BuildRequires : solid-dev
 BuildRequires : sonnet-dev
 BuildRequires : systemd-dev
@@ -85,7 +90,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1533056444
+export SOURCE_DATE_EPOCH=1535777602
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -93,7 +98,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1533056444
+export SOURCE_DATE_EPOCH=1535777602
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/kscreenlocker
 cp COPYING %{buildroot}/usr/share/doc/kscreenlocker/COPYING
