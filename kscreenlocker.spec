@@ -4,7 +4,7 @@
 #
 Name     : kscreenlocker
 Version  : 5.14.3
-Release  : 9
+Release  : 10
 URL      : https://github.com/KDE/kscreenlocker/archive/v5.14.3.tar.gz
 Source0  : https://github.com/KDE/kscreenlocker/archive/v5.14.3.tar.gz
 Summary  : No detailed summary available
@@ -20,27 +20,34 @@ BuildRequires : extra-cmake-modules
 BuildRequires : extra-cmake-modules pkgconfig(wayland-client)
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
 BuildRequires : extra-cmake-modules wayland
+BuildRequires : kcmutils-dev
+BuildRequires : kcodecs-dev
+BuildRequires : kcrash-dev
+BuildRequires : kdeclarative-dev
 BuildRequires : kglobalaccel-dev
 BuildRequires : kidletime-dev
+BuildRequires : knotifications-dev
+BuildRequires : kpackage-dev
+BuildRequires : ktextwidgets-dev
 BuildRequires : kwayland-dev
+BuildRequires : kwidgetsaddons-dev
+BuildRequires : kwindowsystem-dev
+BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(libseccomp)
 BuildRequires : qtbase-dev mesa-dev
+BuildRequires : qtx11extras-dev
+BuildRequires : solid-dev
+BuildRequires : sonnet-dev
 BuildRequires : systemd-dev
+BuildRequires : wayland
+BuildRequires : wayland-dev
 BuildRequires : xcb-util-keysyms-dev
 
 %description
 The KCheckPass authentication software:
 -----------------------------------------
-
-%package abi
-Summary: abi components for the kscreenlocker package.
-Group: Default
-
-%description abi
-abi components for the kscreenlocker package.
-
 
 %package data
 Summary: data components for the kscreenlocker package.
@@ -87,7 +94,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541528034
+export SOURCE_DATE_EPOCH=1542744585
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -95,7 +102,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1541528034
+export SOURCE_DATE_EPOCH=1542744585
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/COPYING
@@ -107,11 +114,6 @@ popd
 %defattr(-,root,root,-)
 /usr/lib64/libexec/kcheckpass
 /usr/lib64/libexec/kscreenlocker_greet
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libKScreenLocker.so.5.14.3.abi
-/usr/share/abi/libKScreenLocker.so.5.abi
 
 %files data
 %defattr(-,root,root,-)
