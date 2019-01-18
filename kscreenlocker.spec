@@ -4,7 +4,7 @@
 #
 Name     : kscreenlocker
 Version  : 5.14.5
-Release  : 12
+Release  : 13
 URL      : https://github.com/KDE/kscreenlocker/archive/v5.14.5.tar.gz
 Source0  : https://github.com/KDE/kscreenlocker/archive/v5.14.5.tar.gz
 Summary  : Library and components for secure lock screen architecture
