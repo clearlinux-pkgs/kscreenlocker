@@ -4,7 +4,7 @@
 #
 Name     : kscreenlocker
 Version  : 5.15.0
-Release  : 14
+Release  : 15
 URL      : https://github.com/KDE/kscreenlocker/archive/v5.15.0.tar.gz
 Source0  : https://github.com/KDE/kscreenlocker/archive/v5.15.0.tar.gz
 Summary  : Library and components for secure lock screen architecture
@@ -20,14 +20,29 @@ BuildRequires : extra-cmake-modules
 BuildRequires : extra-cmake-modules pkgconfig(wayland-client)
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
 BuildRequires : extra-cmake-modules wayland
+BuildRequires : kcmutils-dev
+BuildRequires : kcodecs-dev
+BuildRequires : kcrash-dev
+BuildRequires : kdeclarative-dev
 BuildRequires : kglobalaccel-dev
 BuildRequires : kidletime-dev
+BuildRequires : knotifications-dev
+BuildRequires : kpackage-dev
+BuildRequires : ktextwidgets-dev
 BuildRequires : kwayland-dev
+BuildRequires : kwidgetsaddons-dev
+BuildRequires : kwindowsystem-dev
+BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(libseccomp)
 BuildRequires : qtbase-dev mesa-dev
+BuildRequires : qtx11extras-dev
+BuildRequires : solid-dev
+BuildRequires : sonnet-dev
 BuildRequires : systemd-dev
+BuildRequires : wayland
+BuildRequires : wayland-dev
 BuildRequires : xcb-util-keysyms-dev
 
 %description
@@ -79,7 +94,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549994106
+export SOURCE_DATE_EPOCH=1549994351
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -87,7 +102,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549994106
+export SOURCE_DATE_EPOCH=1549994351
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/COPYING
