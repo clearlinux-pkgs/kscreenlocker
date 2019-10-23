@@ -1,4 +1,4 @@
-5.17.0
+5.17.1
 kcmutils-dev
 kcodecs-dev
 kcrash-dev
@@ -15,5 +15,6 @@ kxmlgui-dev
 qtx11extras-dev
 solid-dev
 sonnet-dev
+util-linux
 wayland
 wayland-dev
