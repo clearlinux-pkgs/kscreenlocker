@@ -1,5 +1,5 @@
 PKG_NAME := kscreenlocker
-URL = https://github.com/KDE/kscreenlocker/archive/v5.19.1/kscreenlocker-5.19.1.tar.gz
+URL = https://download.kde.org/stable/plasma/5.19.2/kscreenlocker-5.19.2.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
