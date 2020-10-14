@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xEC94D18F7F05997E (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.19.4
-Release  : 42
-URL      : https://download.kde.org/stable/plasma/5.19.4/kscreenlocker-5.19.4.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.19.4/kscreenlocker-5.19.4.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.19.4/kscreenlocker-5.19.4.tar.xz.sig
+Version  : 5.20.0
+Release  : 43
+URL      : https://download.kde.org/stable/plasma/5.20.0/kscreenlocker-5.20.0.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.20.0/kscreenlocker-5.20.0.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.20.0/kscreenlocker-5.20.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -20,7 +20,6 @@ Requires: kscreenlocker-locales = %{version}-%{release}
 BuildRequires : Linux-PAM-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
-BuildRequires : extra-cmake-modules
 BuildRequires : extra-cmake-modules pkgconfig(wayland-client)
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
 BuildRequires : extra-cmake-modules wayland
@@ -30,8 +29,6 @@ BuildRequires : ki18n-dev
 BuildRequires : kidletime-dev
 BuildRequires : kwayland-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
-BuildRequires : pkg-config
-BuildRequires : pkgconfig(libseccomp)
 BuildRequires : qtbase-dev mesa-dev
 BuildRequires : systemd-dev
 BuildRequires : xcb-util-keysyms-dev
@@ -87,15 +84,15 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.19.4
-cd %{_builddir}/kscreenlocker-5.19.4
+%setup -q -n kscreenlocker-5.20.0
+cd %{_builddir}/kscreenlocker-5.20.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1597632739
+export SOURCE_DATE_EPOCH=1602701239
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -111,16 +108,16 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1597632739
+export SOURCE_DATE_EPOCH=1602701239
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
-cp %{_builddir}/kscreenlocker-5.19.4/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/kscreenlocker-5.20.0/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
 pushd clr-build
 %make_install
 popd
+%find_lang kcm_screenlocker
 %find_lang kscreenlocker
 %find_lang kscreenlocker_greet
-%find_lang screenlocker_kcm
 
 %files
 %defattr(-,root,root,-)
@@ -134,6 +131,12 @@ popd
 /usr/share/kconf_update/kscreenlocker.upd
 /usr/share/kconf_update/ksreenlocker_5_3_separate_autologin.pl
 /usr/share/knotifications5/ksmserver.notifyrc
+/usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/Appearance.qml
+/usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/LnfConfig.qml
+/usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/WallpaperConfig.qml
+/usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/main.qml
+/usr/share/kpackage/kcms/kcm_screenlocker/metadata.desktop
+/usr/share/kpackage/kcms/kcm_screenlocker/metadata.json
 /usr/share/kservices5/screenlocker.desktop
 /usr/share/ksmserver/screenlocker/org.kde.passworddialog/metadata.desktop
 
@@ -152,13 +155,13 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.19.4
-/usr/lib64/qt5/plugins/screenlocker_kcm.so
+/usr/lib64/libKScreenLocker.so.5.20.0
+/usr/lib64/qt5/plugins/kcms/kcm_screenlocker.so
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
 
-%files locales -f kscreenlocker.lang -f kscreenlocker_greet.lang -f screenlocker_kcm.lang
+%files locales -f kcm_screenlocker.lang -f kscreenlocker.lang -f kscreenlocker_greet.lang
 %defattr(-,root,root,-)
 

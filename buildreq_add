@@ -1,6 +1,8 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-buildreq-kde
-xcb-util-keysyms-dev
-systemd-dev
 Linux-PAM-dev
+buildreq-kde
+kglobalaccel-dev
+kidletime-dev
+systemd-dev
+xcb-util-keysyms-dev
