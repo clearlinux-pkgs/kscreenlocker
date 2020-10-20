@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xEC94D18F7F05997E (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.20.0
-Release  : 43
-URL      : https://download.kde.org/stable/plasma/5.20.0/kscreenlocker-5.20.0.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.20.0/kscreenlocker-5.20.0.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.20.0/kscreenlocker-5.20.0.tar.xz.sig
+Version  : 5.20.1
+Release  : 44
+URL      : https://download.kde.org/stable/plasma/5.20.1/kscreenlocker-5.20.1.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.20.1/kscreenlocker-5.20.1.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.20.1/kscreenlocker-5.20.1.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -84,15 +84,15 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.20.0
-cd %{_builddir}/kscreenlocker-5.20.0
+%setup -q -n kscreenlocker-5.20.1
+cd %{_builddir}/kscreenlocker-5.20.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1602701239
+export SOURCE_DATE_EPOCH=1603209098
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -108,10 +108,10 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1602701239
+export SOURCE_DATE_EPOCH=1603209098
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
-cp %{_builddir}/kscreenlocker-5.20.0/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/kscreenlocker-5.20.1/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
 pushd clr-build
 %make_install
 popd
@@ -155,7 +155,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.20.0
+/usr/lib64/libKScreenLocker.so.5.20.1
 /usr/lib64/qt5/plugins/kcms/kcm_screenlocker.so
 
 %files license
