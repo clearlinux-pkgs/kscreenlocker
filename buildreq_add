@@ -6,3 +6,4 @@ kglobalaccel-dev
 kidletime-dev
 systemd-dev
 xcb-util-keysyms-dev
+layer-shell-qt-dev
