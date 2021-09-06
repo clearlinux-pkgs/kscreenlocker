@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xEC94D18F7F05997E (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.22.1
-Release  : 52
-URL      : https://download.kde.org/stable/plasma/5.22.1/kscreenlocker-5.22.1.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.22.1/kscreenlocker-5.22.1.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.22.1/kscreenlocker-5.22.1.tar.xz.sig
+Version  : 5.22.5
+Release  : 53
+URL      : https://download.kde.org/stable/plasma/5.22.5/kscreenlocker-5.22.5.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.22.5/kscreenlocker-5.22.5.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.22.5/kscreenlocker-5.22.5.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -85,34 +85,34 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.22.1
-cd %{_builddir}/kscreenlocker-5.22.1
+%setup -q -n kscreenlocker-5.22.5
+cd %{_builddir}/kscreenlocker-5.22.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623807450
+export SOURCE_DATE_EPOCH=1630960859
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1623807450
+export SOURCE_DATE_EPOCH=1630960859
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
-cp %{_builddir}/kscreenlocker-5.22.1/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/kscreenlocker-5.22.5/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
 pushd clr-build
 %make_install
 popd
@@ -156,7 +156,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.22.1
+/usr/lib64/libKScreenLocker.so.5.22.5
 /usr/lib64/qt5/plugins/kcms/kcm_screenlocker.so
 
 %files license
