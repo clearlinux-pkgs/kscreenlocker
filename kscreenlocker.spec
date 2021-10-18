@@ -4,7 +4,7 @@
 #
 Name     : kscreenlocker
 Version  : 5.23.0
-Release  : 54
+Release  : 55
 URL      : https://download.kde.org/stable/plasma/5.23.0/kscreenlocker-5.23.0.tar.xz
 Source0  : https://download.kde.org/stable/plasma/5.23.0/kscreenlocker-5.23.0.tar.xz
 Summary  : No detailed summary available
