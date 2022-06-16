@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.24.5
-Release  : 66
-URL      : https://download.kde.org/stable/plasma/5.24.5/kscreenlocker-5.24.5.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.24.5/kscreenlocker-5.24.5.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.24.5/kscreenlocker-5.24.5.tar.xz.sig
+Version  : 5.25.0
+Release  : 67
+URL      : https://download.kde.org/stable/plasma/5.25.0/kscreenlocker-5.25.0.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.25.0/kscreenlocker-5.25.0.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.25.0/kscreenlocker-5.25.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -35,8 +35,8 @@ BuildRequires : systemd-dev
 BuildRequires : xcb-util-keysyms-dev
 
 %description
-The KCheckPass authentication software:
------------------------------------------
+kscreenlocker can be configured to support the PAM ("Pluggable Authentication
+Modules") system for password checking (for unlocking the display).
 
 %package data
 Summary: data components for the kscreenlocker package.
@@ -85,15 +85,15 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.24.5
-cd %{_builddir}/kscreenlocker-5.24.5
+%setup -q -n kscreenlocker-5.25.0
+cd %{_builddir}/kscreenlocker-5.25.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1651618974
+export SOURCE_DATE_EPOCH=1655410001
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -109,10 +109,10 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1651618974
+export SOURCE_DATE_EPOCH=1655410001
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
-cp %{_builddir}/kscreenlocker-5.24.5/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/kscreenlocker-5.25.0/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
 pushd clr-build
 %make_install
 popd
@@ -122,11 +122,11 @@ popd
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/libexec/kcheckpass
 /usr/lib64/libexec/kscreenlocker_greet
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/applications/kcm_screenlocker.desktop
 /usr/share/dbus-1/interfaces/kf5_org.freedesktop.ScreenSaver.xml
 /usr/share/dbus-1/interfaces/org.kde.screensaver.xml
 /usr/share/kconf_update/kscreenlocker.upd
@@ -136,9 +136,6 @@ popd
 /usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/LnfConfig.qml
 /usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/WallpaperConfig.qml
 /usr/share/kpackage/kcms/kcm_screenlocker/contents/ui/main.qml
-/usr/share/kpackage/kcms/kcm_screenlocker/metadata.desktop
-/usr/share/kpackage/kcms/kcm_screenlocker/metadata.json
-/usr/share/kservices5/screenlocker.desktop
 /usr/share/ksmserver/screenlocker/org.kde.passworddialog/metadata.desktop
 
 %files dev
@@ -156,8 +153,8 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.24.5
-/usr/lib64/qt5/plugins/kcms/kcm_screenlocker.so
+/usr/lib64/libKScreenLocker.so.5.25.0
+/usr/lib64/qt5/plugins/plasma/kcms/systemsettings/kcm_screenlocker.so
 
 %files license
 %defattr(0644,root,root,0755)
