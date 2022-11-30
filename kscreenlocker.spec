@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.26.3
-Release  : 76
-URL      : https://download.kde.org/stable/plasma/5.26.3/kscreenlocker-5.26.3.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.26.3/kscreenlocker-5.26.3.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.26.3/kscreenlocker-5.26.3.tar.xz.sig
+Version  : 5.26.4
+Release  : 77
+URL      : https://download.kde.org/stable/plasma/5.26.4/kscreenlocker-5.26.4.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.26.4/kscreenlocker-5.26.4.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.26.4/kscreenlocker-5.26.4.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -84,15 +84,15 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.26.3
-cd %{_builddir}/kscreenlocker-5.26.3
+%setup -q -n kscreenlocker-5.26.4
+cd %{_builddir}/kscreenlocker-5.26.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667919591
+export SOURCE_DATE_EPOCH=1669814576
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -108,7 +108,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1667919591
+export SOURCE_DATE_EPOCH=1669814576
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp %{_builddir}/kscreenlocker-%{version}/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -152,7 +152,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.26.3
+/usr/lib64/libKScreenLocker.so.5.26.4
 /usr/lib64/qt5/plugins/plasma/kcms/systemsettings/kcm_screenlocker.so
 
 %files license
