@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.26.4
-Release  : 77
-URL      : https://download.kde.org/stable/plasma/5.26.4/kscreenlocker-5.26.4.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.26.4/kscreenlocker-5.26.4.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.26.4/kscreenlocker-5.26.4.tar.xz.sig
+Version  : 5.26.5
+Release  : 78
+URL      : https://download.kde.org/stable/plasma/5.26.5/kscreenlocker-5.26.5.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.26.5/kscreenlocker-5.26.5.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.26.5/kscreenlocker-5.26.5.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -32,6 +32,9 @@ BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev lib
 BuildRequires : qtbase-dev mesa-dev
 BuildRequires : systemd-dev
 BuildRequires : xcb-util-keysyms-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 kscreenlocker can be configured to support the PAM ("Pluggable Authentication
@@ -84,31 +87,31 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.26.4
-cd %{_builddir}/kscreenlocker-5.26.4
+%setup -q -n kscreenlocker-5.26.5
+cd %{_builddir}/kscreenlocker-5.26.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1669814576
+export SOURCE_DATE_EPOCH=1673287594
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1669814576
+export SOURCE_DATE_EPOCH=1673287594
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp %{_builddir}/kscreenlocker-%{version}/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -152,7 +155,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.26.4
+/usr/lib64/libKScreenLocker.so.5.26.5
 /usr/lib64/qt5/plugins/plasma/kcms/systemsettings/kcm_screenlocker.so
 
 %files license
