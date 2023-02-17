@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.26.5
-Release  : 78
-URL      : https://download.kde.org/stable/plasma/5.26.5/kscreenlocker-5.26.5.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.26.5/kscreenlocker-5.26.5.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.26.5/kscreenlocker-5.26.5.tar.xz.sig
+Version  : 5.27.0
+Release  : 79
+URL      : https://download.kde.org/stable/plasma/5.27.0/kscreenlocker-5.27.0.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.27.0/kscreenlocker-5.27.0.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.27.0/kscreenlocker-5.27.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GPL-2.0
+License  : BSD-3-Clause CC0-1.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0
 Requires: kscreenlocker-data = %{version}-%{release}
 Requires: kscreenlocker-lib = %{version}-%{release}
 Requires: kscreenlocker-license = %{version}-%{release}
@@ -29,6 +29,7 @@ BuildRequires : kidletime-dev
 BuildRequires : kwayland-dev
 BuildRequires : layer-shell-qt-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86vm-dev
+BuildRequires : libkscreen-dev
 BuildRequires : qtbase-dev mesa-dev
 BuildRequires : systemd-dev
 BuildRequires : xcb-util-keysyms-dev
@@ -87,15 +88,15 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.26.5
-cd %{_builddir}/kscreenlocker-5.26.5
+%setup -q -n kscreenlocker-5.27.0
+cd %{_builddir}/kscreenlocker-5.27.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1673287594
+export SOURCE_DATE_EPOCH=1676672646
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -111,10 +112,21 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1673287594
+export SOURCE_DATE_EPOCH=1676672646
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp %{_builddir}/kscreenlocker-%{version}/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/3e8971c6c5f16674958913a94a36b1ea7a00ac46 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/3e8971c6c5f16674958913a94a36b1ea7a00ac46 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/GPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/2123756e0b1fc8243547235a33c0fcabfe3b9a51 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LGPL-2.1-only.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/81b58c89ceef8e9f8bd5d00a287edbd15f9d3567 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LGPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/19d98e1b6f8ef12849ea4012a052d3907f336c91 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/7d9831e05094ce723947d729c2a46a09d6e90275 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/7d9831e05094ce723947d729c2a46a09d6e90275 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/e458941548e0864907e654fa2e192844ae90fc32 || :
+cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/e458941548e0864907e654fa2e192844ae90fc32 || :
 pushd clr-build
 %make_install
 popd
@@ -155,12 +167,20 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.26.5
+/usr/lib64/libKScreenLocker.so.5.27.0
 /usr/lib64/qt5/plugins/plasma/kcms/systemsettings/kcm_screenlocker.so
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/kscreenlocker/19d98e1b6f8ef12849ea4012a052d3907f336c91
+/usr/share/package-licenses/kscreenlocker/2123756e0b1fc8243547235a33c0fcabfe3b9a51
+/usr/share/package-licenses/kscreenlocker/3e8971c6c5f16674958913a94a36b1ea7a00ac46
 /usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c
+/usr/share/package-licenses/kscreenlocker/7d9831e05094ce723947d729c2a46a09d6e90275
+/usr/share/package-licenses/kscreenlocker/81b58c89ceef8e9f8bd5d00a287edbd15f9d3567
+/usr/share/package-licenses/kscreenlocker/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
+/usr/share/package-licenses/kscreenlocker/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+/usr/share/package-licenses/kscreenlocker/e458941548e0864907e654fa2e192844ae90fc32
 
 %files locales -f kcm_screenlocker.lang -f kscreenlocker.lang -f kscreenlocker_greet.lang
 %defattr(-,root,root,-)
