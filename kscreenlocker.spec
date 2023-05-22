@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xD7574483BB57B18D (jr@jriddell.org)
 #
 Name     : kscreenlocker
-Version  : 5.27.4
-Release  : 84
-URL      : https://download.kde.org/stable/plasma/5.27.4/kscreenlocker-5.27.4.tar.xz
-Source0  : https://download.kde.org/stable/plasma/5.27.4/kscreenlocker-5.27.4.tar.xz
-Source1  : https://download.kde.org/stable/plasma/5.27.4/kscreenlocker-5.27.4.tar.xz.sig
+Version  : 5.27.5
+Release  : 85
+URL      : https://download.kde.org/stable/plasma/5.27.5/kscreenlocker-5.27.5.tar.xz
+Source0  : https://download.kde.org/stable/plasma/5.27.5/kscreenlocker-5.27.5.tar.xz
+Source1  : https://download.kde.org/stable/plasma/5.27.5/kscreenlocker-5.27.5.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0
@@ -89,31 +89,48 @@ locales components for the kscreenlocker package.
 
 
 %prep
-%setup -q -n kscreenlocker-5.27.4
-cd %{_builddir}/kscreenlocker-5.27.4
+%setup -q -n kscreenlocker-5.27.5
+cd %{_builddir}/kscreenlocker-5.27.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680720992
+export SOURCE_DATE_EPOCH=1684783089
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1680720992
+export SOURCE_DATE_EPOCH=1684783089
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp %{_builddir}/kscreenlocker-%{version}/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -128,15 +145,20 @@ cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-GPL.tx
 cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/7d9831e05094ce723947d729c2a46a09d6e90275 || :
 cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/e458941548e0864907e654fa2e192844ae90fc32 || :
 cp %{_builddir}/kscreenlocker-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kscreenlocker/e458941548e0864907e654fa2e192844ae90fc32 || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang kcm_screenlocker
 %find_lang kscreenlocker
 %find_lang kscreenlocker_greet
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
+/V3/usr/lib64/libexec/kscreenlocker_greet
 /usr/lib64/libexec/kscreenlocker_greet
 
 %files data
@@ -156,6 +178,7 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libKScreenLocker.so
 /usr/include/KScreenLocker/KScreenLocker/KsldApp
 /usr/include/KScreenLocker/KScreenLocker/kscreenlocker_export.h
 /usr/include/KScreenLocker/KScreenLocker/ksldapp.h
@@ -168,8 +191,11 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libKScreenLocker.so.5
+/V3/usr/lib64/libKScreenLocker.so.5.27.5
+/V3/usr/lib64/qt5/plugins/plasma/kcms/systemsettings/kcm_screenlocker.so
 /usr/lib64/libKScreenLocker.so.5
-/usr/lib64/libKScreenLocker.so.5.27.4
+/usr/lib64/libKScreenLocker.so.5.27.5
 /usr/lib64/qt5/plugins/plasma/kcms/systemsettings/kcm_screenlocker.so
 
 %files license
