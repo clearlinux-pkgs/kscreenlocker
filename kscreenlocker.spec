@@ -9,7 +9,7 @@
 #
 Name     : kscreenlocker
 Version  : 5.27.10
-Release  : 91
+Release  : 92
 URL      : https://download.kde.org/stable/plasma/5.27.10/kscreenlocker-5.27.10.tar.xz
 Source0  : https://download.kde.org/stable/plasma/5.27.10/kscreenlocker-5.27.10.tar.xz
 Source1  : https://download.kde.org/stable/plasma/5.27.10/kscreenlocker-5.27.10.tar.xz.sig
@@ -99,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701918864
+export SOURCE_DATE_EPOCH=1702003448
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -158,7 +158,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701918864
+export SOURCE_DATE_EPOCH=1702003448
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kscreenlocker
 cp %{_builddir}/kscreenlocker-%{version}/COPYING %{buildroot}/usr/share/package-licenses/kscreenlocker/4cc77b90af91e615a64ae04893fdffa7939db84c || :
