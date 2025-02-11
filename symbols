@@ -23,5 +23,6 @@ libKScreenLocker.so.6:ScreenLocker::KSldApp::startLockProcess(ScreenLocker::Esta
 libKScreenLocker.so.6:ScreenLocker::KSldApp::uninhibit()
 libKScreenLocker.so.6:ScreenLocker::KSldApp::unlock()
 libKScreenLocker.so.6:ScreenLocker::KSldApp::unlocked()
+libKScreenLocker.so.6:ScreenLocker::KSldApp::updateIdleTimeout()
 libKScreenLocker.so.6:ScreenLocker::KSldApp::userActivity()
 libKScreenLocker.so.6:ScreenLocker::KSldApp::~KSldApp()
